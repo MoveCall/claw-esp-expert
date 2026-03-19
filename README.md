@@ -7,6 +7,10 @@
 [![Platform: OpenClaw](https://img.shields.io/badge/Platform-OpenClaw.ai-blue)](https://openclaw.ai)
 [![Framework: ESP-IDF](https://img.shields.io/badge/Framework-ESP--IDF%20v5.x-red)](https://github.com/espressif/esp-idf)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/MoveCall/claw-esp-expert/main/docs/images/claw-esp-expert_diagram.png" alt=" " width="100%" />
+</p>
+
 Claw-ESP-Expert is a diagnostic-first skill for ESP32 + ESP-IDF workflows. It focuses on the highest-value pain points in embedded development: component lookup, pin safety, build failures, partition overflow, and panic decoding.
 
 ## Install
