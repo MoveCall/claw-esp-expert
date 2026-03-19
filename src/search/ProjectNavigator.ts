@@ -1,6 +1,6 @@
-import fs from 'fs-extra';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'path';
-import { execa } from 'execa';
+import { pathExists } from '../common/fs';
 
 export interface ModuleBrief {
     name: string;
@@ -30,15 +30,15 @@ export class ProjectNavigator {
         try {
             // 简单的递归搜索包含 query 的文件夹名
             const walk = async (dir: string) => {
-                const files = await fs.readdir(dir);
+                const files = await readdir(dir);
                 for (const file of files) {
                     const fullPath = path.join(dir, file);
-                    const stat = await fs.stat(fullPath);
+                    const fileStat = await stat(fullPath);
                     
-                    if (stat.isDirectory()) {
+                    if (fileStat.isDirectory()) {
                         // 如果文件夹名字匹配，或者包含 CMakeLists.txt (说明是工程)
                         if (file.toLowerCase().includes(query.toLowerCase())) {
-                            if (await fs.pathExists(path.join(fullPath, 'CMakeLists.txt'))) {
+                            if (await pathExists(path.join(fullPath, 'CMakeLists.txt'))) {
                                 results.push(fullPath);
                             }
                         }
@@ -65,7 +65,7 @@ export class ProjectNavigator {
         let hardware: string[] = [];
 
         if (readmePath) {
-            const content = await fs.readFile(readmePath, 'utf-8');
+            const content = await readFile(readmePath, 'utf-8');
             description = this.extractSummary(content);
             hardware = this.extractHardwareInfo(content);
         }
@@ -88,7 +88,7 @@ export class ProjectNavigator {
         const files = ['README_CN.md', 'README_cn.md', 'README.md'];
         for (const f of files) {
             const p = path.join(dir, f);
-            if (await fs.pathExists(p)) return p;
+            if (await pathExists(p)) return p;
         }
         return null;
     }
@@ -119,18 +119,18 @@ export class ProjectNavigator {
      */
     private async generateConciseTree(dir: string): Promise<string> {
         let tree = `${path.basename(dir)}/\n`;
-        const files = await fs.readdir(dir);
+        const files = await readdir(dir);
         
         for (const file of files) {
             if (file.startsWith('.')) continue; // 跳过隐藏文件
             const fullPath = path.join(dir, file);
-            const stat = await fs.stat(fullPath);
+            const fileStat = await stat(fullPath);
             
-            if (stat.isDirectory()) {
+            if (fileStat.isDirectory()) {
                 tree += `├── ${file}/\n`;
                 // 只看 main 目录里面
                 if (file === 'main') {
-                    const subFiles = await fs.readdir(fullPath);
+                    const subFiles = await readdir(fullPath);
                     subFiles.forEach(sf => tree += `│   ├── ${sf}\n`);
                 }
             } else {
