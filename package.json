@@ -34,6 +34,14 @@
     "openclaw",
     "embedded"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MoveCall/claw-esp-expert.git"
+  },
+  "homepage": "https://github.com/MoveCall/claw-esp-expert#readme",
+  "bugs": {
+    "url": "https://github.com/MoveCall/claw-esp-expert/issues"
+  },
   "author": "Movecall",
   "license": "MIT",
   "devDependencies": {
