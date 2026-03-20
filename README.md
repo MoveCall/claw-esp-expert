@@ -8,7 +8,7 @@
 [![Framework: ESP-IDF](https://img.shields.io/badge/Framework-ESP--IDF%20v5.x-red)](https://github.com/espressif/esp-idf)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/MoveCall/claw-esp-expert/main/docs/images/claw-esp-expert_diagram.png" alt=" " width="100%" />
+  <img src="https://raw.githubusercontent.com/MoveCall/claw-esp-expert/refs/heads/master/docs/images/claw-esp-expert_diagram.png" alt=" " width="100%" />
 </p>
 
 Claw-ESP-Expert is a diagnostic-first skill for ESP32 + ESP-IDF workflows. It focuses on the highest-value pain points in embedded development: component lookup, pin safety, build failures, partition overflow, and panic decoding.
@@ -24,6 +24,7 @@ Default behavior:
 - copies a self-contained `skill/` bundle
 - does not silently edit `SOUL.md`
 - does not silently modify project files or system permissions
+- environment setup is guidance-first; the skill can inspect the local setup and return install steps, but it does not fully provision ESP-IDF automatically
 
 ## MVP highlights
 
@@ -44,7 +45,7 @@ Supporting tools:
 - `manage_env`
 - `explore_demo`
 - `flash_and_monitor`
-- `execute_project`
+- `execute_project` *(minimum execution loop, not full self-healing automation)*
 
 Supported chip families:
 - `esp32`
@@ -87,4 +88,5 @@ claw-esp-expert/
 
 - This is a usable MVP, not a full automation platform
 - It returns suggestions, diagnostics, and patch-style drafts before attempting deeper automation
+- Environment setup is guidance-first, not full automatic provisioning
 - HIL automation and full self-healing workflows are intentionally out of scope for the first release

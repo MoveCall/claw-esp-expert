@@ -47,7 +47,7 @@ These tools are implemented in the bundled runtime and are invoked through `scri
 Purpose:
 - inspect local ESP-IDF availability
 - report `$IDF_PATH`, common install paths, `python/python3`, and `idf.py` availability
-- when explicitly asked, return mirror-aware manual installation guidance instead of running upstream install scripts automatically
+- when explicitly asked, return mirror-aware manual installation guidance instead of fully provisioning ESP-IDF or running upstream install scripts automatically
 
 Example invocation:
 
@@ -128,6 +128,7 @@ Purpose:
 - analyze the resulting monitor log
 - automatically trigger panic decoding when panic markers appear and an ELF path is available
 - return stage status, stage summary, timeout info, recent log tail, and common serial/tool failure categories
+- this is a minimum execution wrapper around `idf.py flash monitor`, not a full serial-port management layer
 
 Example invocation:
 
@@ -142,6 +143,7 @@ Purpose:
 - build the project
 - then run `flash_and_monitor`
 - return a single structured result for the whole flow
+- this is a minimum orchestration flow, not a full self-healing or autonomous repair workflow
 
 Example invocation:
 
